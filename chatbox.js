@@ -2,7 +2,7 @@
 // api.ai code
 var accessToken = "6bafb80123194e06908681e46adb533f";
 var baseUrl = "https://api.api.ai/v1/";
-var apiResponse = "";
+// var apiResponse = "";
 
 $(document).ready(function() {
   $("#btn-input").keypress(function(event) {
@@ -56,7 +56,8 @@ function send() {
     data: JSON.stringify({ query: text, lang: "en", sessionId: "somerandomthing" }),
     success: function(data) {
       getMessage(data);
-      postApiReply();
+      postApiReply(data);
+      postDebugReply(data);
     },
     error: function() {
       setResponse("Internal Server Error");
@@ -92,7 +93,7 @@ function postUserMessage() {
 
 
 // inserting api.ai reply into chatbox
-var chatReplyBot =
+var botReplyElement =
   '<li class="left clearfix"><span class="chat-img pull-left"></span>\n\
     <div class="chat-body clearfix">\n\
       <div class="header">\n\
@@ -104,17 +105,18 @@ var chatReplyBot =
     </div>\n\
   </li>';
 
-function getMessage(val) {
-  apiResponse = val.result.fulfillment.speech;
-}
+// function getMessage(val) {
+//   apiResponse = val.result.fulfillment.speech;
+// }
 
 // function to force delay on the bot answering. It is too fast.
 function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-async function postApiReply() {
-  $("#chat-list").append(chatReplyBot);
+async function postApiReply(data) {
+  let apiResponse = val.result.fulfillment.speech;
+  $("#chat-list").append(botReplyElement);
   scrollToBottom();
   messageTyping();
   await sleep(400);
@@ -124,6 +126,10 @@ async function postApiReply() {
   $("input.bot-date-posted").last().val(date);
   scrollToBottom();
   // $("small.time-elapsed").last().text("Just now");
+}
+
+function postDebugReply(data) {
+  $("#debug-response").text(data);
 }
 
 function messageTyping(action) {
