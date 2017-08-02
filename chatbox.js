@@ -115,7 +115,7 @@ function sleep(ms) {
 }
 
 async function postApiReply(data) {
-  let apiResponse = val.result.fulfillment.speech;
+  let apiResponse = data.result.fulfillment.speech;
   $("#chat-list").append(botReplyElement);
   scrollToBottom();
   messageTyping();
