@@ -38,9 +38,9 @@ function setInput(text) {
   send();
 }
 
-function updateRec() {
-  $("#rec").text(recognition ? "Stop" : "Speak");
-}
+// function updateRec() {
+//   $("#rec").text(recognition ? "Stop" : "Speak");
+// }
 
 function send() {
   var text = $("#btn-input").val();
@@ -116,11 +116,12 @@ async function postApiReply() {
   $("#chat-list").append(chatReplyBot);
   scrollToBottom();
   messageTyping();
-  await sleep(800);
+  await sleep(400);
   messageTyping('remove');
   $("p.api-msg").last().text(apiResponse);
   let date = Date.now();
   $("input.bot-date-posted").last().val(date);
+  scrollToBottom();
   // $("small.time-elapsed").last().text("Just now");
 }
 
