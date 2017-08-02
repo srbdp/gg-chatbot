@@ -19,6 +19,7 @@ $(document).ready(function() {
     event.preventDefault();
     postUserMessage();
     send();
+    document.getElementById("btn-input").focus();
   })
 
 }); // end document.ready  
