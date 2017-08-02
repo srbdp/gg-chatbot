@@ -55,7 +55,7 @@ function send() {
     },
     data: JSON.stringify({ query: text, lang: "en", sessionId: "somerandomthing" }),
     success: function(data) {
-      getMessage(data);
+      // getMessage(data);
       postApiReply(data);
       postDebugReply(JSON.stringify(data, undefined, 2));
     },
