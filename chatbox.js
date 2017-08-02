@@ -57,7 +57,7 @@ function send() {
     success: function(data) {
       getMessage(data);
       postApiReply(data);
-      postDebugReply(data);
+      postDebugReply(JSON.stringify(data, undefined, 2));
     },
     error: function() {
       setResponse("Internal Server Error");
